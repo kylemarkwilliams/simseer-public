@@ -1,5 +1,3 @@
-package simseer.extractors;
-
 /*
     SimSeer - a search engine for finding similar documents
     Copyright (C) 2012-2013  Kyle Williams <kwilliams@psu.edu>
