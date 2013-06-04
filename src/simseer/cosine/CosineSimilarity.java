@@ -39,6 +39,12 @@ import java.util.HashMap;
 /**
  * This class calculates the cosine similarity between two documents.
  * Somewhat based on http://sujitpal.blogspot.com/2011/10/computing-document-similarity-using.html
+ * 
+ * The code works as follows:
+ * 1. A HashMap representing the vocabulary is built for both languages
+ * 2. A DocVector is created for each document and initialized with the vocabulary
+ * 3. The weight of each token in the DocVector is updated based on the frequency in the document represented by that DocVector
+ * 4. The DocVectors are normalized and the cosine similarity between the two is calculated
  */
 
 public class CosineSimilarity {
@@ -66,7 +72,7 @@ public class CosineSimilarity {
         int[] termFreqs1 = vec1.getTermFrequencies();
         int[] termFreqs2 = vec2.getTermFrequencies();
 
-        //Store the terms and their positions in a hashmap
+        //Store the terms and their positions in a hashmap - this represents the vocabulary
         int pos = 0;
         for (String term : termTexts1) {
             terms.put(term, pos++);
@@ -81,7 +87,7 @@ public class CosineSimilarity {
         DocVector dv1 = new DocVector(terms);
         DocVector dv2 = new DocVector(terms);
 
-        //Set the entries in the two documents
+        //Set the entries in the two documents, i.e., the term weights in the document vectors
         for (int i = 0; i < termTexts1.length; i++) {
             dv1.setEntry(termTexts1[i], termFreqs1[i]);
         }
